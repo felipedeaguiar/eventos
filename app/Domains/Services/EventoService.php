@@ -18,5 +18,15 @@ class EventoService{
         return $this->eventoRepository->add($data);
     }
 
+    public function getAll()
+    {
+        return $this->eventoRepository->getAll();
+    }
+
+    public function getListas($id)
+    {
+        return $this->eventoRepository->getListas($id);
+    }
+
 
 }

@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    
+
 });
 
 Route::resource('eventos', 'EventoController');
+Route::get('eventos/{id}/listas', 'EventoController@getListas');

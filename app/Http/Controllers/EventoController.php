@@ -25,7 +25,9 @@ class EventoController extends Controller
      */
     public function index()
     {
+        $eventos = $this->eventoService->getAll();
 
+        return view('admin.evento.index', array('eventos' => $eventos));
     }
 
     /**
@@ -48,19 +50,22 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = $request->validate([
+        $validator = \Validator::make($request->all(),[
             'nome' => 'required',
             'data' => 'required',
             'id_casa' => 'required',
         ]);
 
         if ($validator->fails()) {
-            return redirect('evento/create')
+            return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
-        }else{
-            $this->eventoService->add($request->all());
         }
+
+        $this->eventoService->add($request->all());
+
+        return redirect()->back()->withSuccess('Sucesso!');
+
     }
 
     /**
@@ -106,5 +111,11 @@ class EventoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getListas($id)
+    {
+       $listas = $this->eventoService->getListas($id);
+       return view('admin.evento.listas', array('listas' => $listas));
     }
 }
