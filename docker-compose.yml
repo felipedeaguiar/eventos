@@ -1,0 +1,40 @@
+####
+# ATTENTION:
+# Replace all occurrences of sandbox with your project's name.
+####
+
+# v3 syntax
+version: '3'
+
+# Named volumes
+volumes:
+  # MySQL Data
+  sandbox-mysql-data:
+    driver: local
+
+services:
+  # MySQL (5.7)
+  mysql:
+    image: mysql:5.7
+    container_name: sandbox-mysql
+    volumes:
+      - sandbox-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=sandbox
+      - MYSQL_DATABASE=sandbox
+      - MYSQL_USER=sandbox
+      - MYSQL_PASSWORD=sandbox
+
+  # PHP (with Nginx)
+  app:
+    image: ambientum/php:7.3-nginx
+    container_name: sandbox-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "8080:8080"
+    links:
+      - mysql
+
