@@ -10,6 +10,6 @@ class Casa extends Model
 
     public function eventos()
     {
-        return $this->belongsTo('App\Domains\Evento');
+        return $this->hasMany('App\Domains\Evento', 'id_casa', 'id');
     }
 }

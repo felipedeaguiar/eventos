@@ -11,19 +11,19 @@
         <thead>
           <tr>
             <th scope="col">Nome</th>
-            <th scope="col">Validade</th>
+            <th scope="col">CPF</th>
             <th scope="col">Numero de pessoas</th>
             <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
-        @foreach ($listas as $lista)
+        @foreach ($clientes as $cliente)
           <tr>
-            <th scope="row">{{$lista->nome_lista}}</th>
-            <td>{{$lista->validade}}</td>
+            <th scope="row">{{$cliente->nome}}</th>
+            <td>{{$cliente->cpf}}</td>
             <td>100</td>
             <td>
-                <a href="/listas/{{$lista->id}}/clientes">Detalhes</a>
+                <a href="/listas/clientes">Detalhes</a>
                 <a href="#">Editar</a>
                 <a href="#">Excluir</a>
             </td>

@@ -6,8 +6,21 @@ use App\Domains\Casa;
 
 class CasaRepository{
 
-    public function getAll(){
-        return Casa::all();
+    protected $model;
+
+    public function __construct(Casa $casa)
+    {
+        $this->model = $casa;
     }
+    public function getAll()
+    {
+        return $this->model::all();
+    }
+    public function paginate($pages)
+    {
+
+        return $this->paginate($pages);
+    }
+
 
 }

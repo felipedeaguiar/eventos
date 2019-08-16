@@ -2,22 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Domains\Services\CasaService;
+use App\Domains\ListaBonus;
 use Illuminate\Http\Request;
-use App\Domains\Casa;
-use App\Domains\Services\EventoService;
 
-class EventoController extends Controller
+class ListaController extends Controller
 {
-
-    protected $casaService;
-
-    function __construct(CasaService $casaService, EventoService $eventoService)
-    {
-        $this->casaService = $casaService;
-        $this->eventoService = $eventoService;
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,9 +14,7 @@ class EventoController extends Controller
      */
     public function index()
     {
-        $eventos = $this->eventoService->getAll();
-
-        return view('admin.evento.index', array('eventos' => $eventos));
+        //
     }
 
     /**
@@ -37,9 +24,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-        $casas = Casa::all();
-
-        return view('admin.evento.create', array('casas' => $casas));
+        //
     }
 
     /**
@@ -50,22 +35,7 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = \Validator::make($request->all(),[
-            'nome' => 'required',
-            'data' => 'required',
-            'id_casa' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        $this->eventoService->add($request->all());
-
-        return redirect()->back()->withSuccess('Sucesso!');
-
+        //
     }
 
     /**
@@ -113,4 +83,7 @@ class EventoController extends Controller
         //
     }
 
+    public function getClientesLista($id){
+        return ListaBonus::find(1)->clientes;
+    }
 }
